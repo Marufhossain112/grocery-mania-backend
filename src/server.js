@@ -254,6 +254,24 @@ async function run() {
             const result = await cursor.toArray();
             res.send(result);
         });
+        // get all  products
+        app.get("/allProducts", async (req, res) => {
+            const query = {};
+            const cursor = products.find(query);
+            const result = await cursor.toArray();
+            res.send(result);
+        });
+
+        // delete a product
+        app.delete("/cart/:id", async (req, res) => {
+            const id = req.params.id;
+            // console.log("Id", id);
+            const query = { _id: id };
+            // console.log("query", query);
+            const result = await cartOrder.deleteOne(query);
+            // console.log("resulty", result);
+            res.send(result);
+        });
 
         // Pagination
         // app.delete("/products/:id", async (req, res) => {
